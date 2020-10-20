@@ -1,0 +1,31 @@
+name: tp_final
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+  http: ^0.12.2
+  font_awesome_flutter: ^8.10.0
+  shared_preferences: ^0.5.12
+  provider: ^4.3.2+2
+  cached_network_image: ^2.3.2+1
+  rflutter_alert: ^1.1.0
+  flushbar: ^1.10.4
+  animated_text_kit: ^2.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
