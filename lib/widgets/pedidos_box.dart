@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:tp_final/constants/colors.dart';
+import 'package:tp_final/constants/constants.dart';
 import 'package:tp_final/services/pedido_metodos.dart';
 import 'package:tp_final/widgets/alert_edit_widget.dart';
+import 'package:tp_final/widgets/snack_bar.dart';
 import 'package:tp_final/widgets/widgets.dart';
 
 class MyBoxPedidos extends StatefulWidget {
@@ -35,9 +38,9 @@ class MyBoxPedidos extends StatefulWidget {
 }
 
 class _MyBoxPedidosState extends State<MyBoxPedidos> {
-  final produtoController = TextEditingController();
   final precoController = TextEditingController();
   final itemController = TextEditingController();
+  final nomeController = TextEditingController();
 
   PedidosMetodo pedidoMetodo = PedidosMetodo();
 
@@ -138,13 +141,10 @@ class _MyBoxPedidosState extends State<MyBoxPedidos> {
                 ),
               ),
             ),
-            alertTextField(produtoController, '$nomePedido', null,
+            alertTextField(nomeController, '$nomePedido', null,
                 FontAwesomeIcons.productHunt),
             alertTextField(
-                itemController,
-                '$itemPedido',
-                [FilteringTextInputFormatter.digitsOnly],
-                FontAwesomeIcons.database),
+                itemController, '$itemPedido', null, FontAwesomeIcons.database),
             alertTextField(precoController, precoPedido.toString(), null,
                 Icons.monetization_on),
           ],
@@ -153,13 +153,12 @@ class _MyBoxPedidosState extends State<MyBoxPedidos> {
       buttons: [
         DialogButton(
           onPressed: () {
-            /* networkHelper.updateUser(
-              nomeController.text,
-              nascimentoController.text,
-              double.parse(salarioController.text),
-              id,
-            );*/
-            Navigator.pop(context);
+            _atualizarPedido(pedidoMetodo, widget, id, nomeController,
+                itemController, precoController);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                '/homePage', (Route<dynamic> route) => false);
+            snackBAr(context, kSnackUpdateTitle, kSnackUpdateMessage,
+                kSnackBarColor);
           },
           child: Text(
             "Salvar",
@@ -168,5 +167,25 @@ class _MyBoxPedidosState extends State<MyBoxPedidos> {
         )
       ],
     ).show();
+  }
+
+  _atualizarPedido(
+    PedidosMetodo pedidoMetodos,
+    MyBoxPedidos widget,
+    int id,
+    TextEditingController nomeController,
+    TextEditingController itemsController,
+    TextEditingController precoController,
+  ) {
+    pedidoMetodos.updatePedido(
+      id,
+      nomeController.text == '' ? widget.nomePedido : nomeController.text,
+      itemsController.text == ''
+          ? widget.itemsPedido
+          : int.parse(itemsController.text),
+      precoController.text == ''
+          ? widget.precoPedido
+          : double.parse(precoController.text),
+    );
   }
 }

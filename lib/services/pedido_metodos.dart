@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:tp_final/helpers/pedidos.dart';
 
 class PedidosMetodo {
-  static const String url = 'http://localhost:3003/sistema/pedidos';
+  static const String url = 'https://apinodewin.azurewebsites.net/pedidos';
 
   Future<Pedidos> createPedido(
     String nomePedido,
@@ -33,31 +33,33 @@ class PedidosMetodo {
     }
   }
 
-  Future<Pedidos> updateCliente(
+  Future<Pedidos> updatePedido(
     int idPedido,
+    String nomePedido,
     int itemsPedido,
     double precoPedido,
   ) async {
     final http.Response response = await http.put(
-      '$url',
+      'https://apinodewin.azurewebsites.net/pedidos/$idPedido',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
         'itemsPedido': itemsPedido,
         'precoPedido': precoPedido,
+        'nomePedido': nomePedido,
       }),
     );
     if (response.statusCode == 200) {
       return Pedidos.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load a Pedido');
     }
   }
 
-  Future<Pedidos> deletePedido(var id) async {
+  Future<Pedidos> deletePedido(int id) async {
     final http.Response response = await http.delete(
-      'http://localhost:3003/sistema/pedidos/$id',
+      'https://apinodewin.azurewebsites.net/pedidos/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -74,7 +76,7 @@ class PedidosMetodo {
     if (response.statusCode == 200) {
       return compute(parseDados, response.body);
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load Pedido');
     }
   }
 

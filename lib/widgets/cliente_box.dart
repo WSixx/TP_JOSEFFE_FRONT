@@ -2,9 +2,8 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:tp_final/constants/colors.dart';
 import 'package:tp_final/constants/constants.dart';
-import 'package:tp_final/screens/cliente_screen.dart';
-import 'package:tp_final/screens/home_page.dart';
 import 'package:tp_final/services/cliente_metodos.dart';
 import 'package:tp_final/widgets/alert_edit_widget.dart';
 import 'package:tp_final/widgets/snack_bar.dart';
@@ -162,19 +161,20 @@ class _MyBoxClienteState extends State<MyBoxCliente> {
                 children: [
                   Text('Status: '),
                   RaisedButton(
-                      child: Text('${status.toString()}'),
-                      color: status == true ? Colors.green : Colors.red,
-                      onPressed: () {
-                        setState(() {
-                          if (status == false) {
-                            status = true;
-                            statusController.text = 'true';
-                          } else {
-                            status = false;
-                            statusController.text = 'false';
-                          }
-                        });
-                      }),
+                    child: Text('${status.toString()}'),
+                    color: status == true ? kClienteAtivoColor : kRedColor,
+                    onPressed: () {
+                      setState(() {
+                        if (status == false) {
+                          status = true;
+                          statusController.text = 'true';
+                        } else {
+                          status = false;
+                          statusController.text = 'false';
+                        }
+                      });
+                    },
+                  ),
                 ],
               ),
             ],
@@ -196,11 +196,8 @@ class _MyBoxClienteState extends State<MyBoxCliente> {
             );
             Navigator.of(context).pushNamedAndRemoveUntil(
                 '/homePage', (Route<dynamic> route) => false);
-            snackBAr(
-                context,
-                "Dados Atualizados",
-                "Dados dos clietnets foram atualizados cm sucesso!!",
-                Colors.blue);
+            snackBAr(context, kSnackUpdateTitle, kSnackUpdateMessage,
+                kSnackBarColor);
           },
           child: Text(
             "Salvar",

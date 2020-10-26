@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:tp_final/helpers/clientes.dart';
 
 class ClienteMetodos {
-  static const String url = 'http://localhost:3003/sistema/clientes';
+  static const String url = 'https://apinodewin.azurewebsites.net/clientes';
 
   Future<Clientes> createCliente(
     String nomeCliente,
@@ -26,7 +26,7 @@ class ClienteMetodos {
         'statusCliente': true,
       }),
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return Clientes.fromJson(jsonDecode(response.body));
     } else {
       throw Exception(
@@ -43,7 +43,7 @@ class ClienteMetodos {
     String status,
   ) async {
     final http.Response response = await http.put(
-      'http://localhost:3003/sistema/clientes/$id',
+      'https://apinodewin.azurewebsites.net/clientes/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -62,9 +62,9 @@ class ClienteMetodos {
     }
   }
 
-  Future<Clientes> deleteCliente(var id) async {
+  Future<Clientes> deleteCliente(int id) async {
     final http.Response response = await http.delete(
-      'http://localhost:3003/sistema/clientes/$id',
+      'https://apinodewin.azurewebsites.net/clientes/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -77,21 +77,26 @@ class ClienteMetodos {
   }
 
   Future<List<Clientes>> pegaDados() async {
-    final response = await http.get('$url');
+    final response = await http.get(
+      '$url',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
     if (response.statusCode == 200) {
       return compute(parseDados, response.body);
     } else {
-      throw Exception('Failed to load data');
+      throw Exception('Failed to load Cliente');
     }
   }
 
   Future<List<Clientes>> pegaDadosWhere(String nome) async {
     final response =
-        await http.get('http://localhost:3003/sistema/clientes/$nome');
+        await http.get('https://apinodewin.azurewebsites.net/clientes/$nome');
     if (response.statusCode == 200) {
       return compute(parseDados, response.body);
     } else {
-      throw Exception('Failed to load data');
+      throw Exception('Failed to load Cliente');
     }
   }
 

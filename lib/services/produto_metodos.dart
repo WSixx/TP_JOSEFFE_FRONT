@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:tp_final/helpers/produtos.dart';
 
 class ProdutosMetodos {
-  static const String url = 'http://localhost:3003/sistema/produtos';
+  static const String url = 'https://apinodewin.azurewebsites.net/produtos';
 
   Future<Produtos> createProduto(
     String produtoNome,
@@ -41,7 +40,7 @@ class ProdutosMetodos {
     int produtoQtd,
   ) async {
     final http.Response response = await http.put(
-      'url',
+      'https://apinodewin.azurewebsites.net/produtos/$idProduto',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -55,13 +54,13 @@ class ProdutosMetodos {
     if (response.statusCode == 200) {
       return Produtos.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load produtos');
     }
   }
 
   Future<Produtos> deleteProdutos(int id) async {
     final http.Response response = await http.delete(
-      'http://localhost:3003/sistema/produtos/$id',
+      'https://apinodewin.azurewebsites.net/produtos/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -74,7 +73,8 @@ class ProdutosMetodos {
   }
 
   Future<List<Produtos>> pegaDados() async {
-    final response = await http.get('$url');
+    final response =
+        await http.get('https://apinodewin.azurewebsites.net/produtos');
     if (response.statusCode == 200) {
       return compute(parseDados, response.body);
     } else {

@@ -1,9 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tp_final/constants/colors.dart';
+import 'package:tp_final/constants/constants.dart';
 import 'package:tp_final/helpers/pedidos.dart';
 import 'package:tp_final/services/pedido_metodos.dart';
 import 'package:tp_final/widgets/pedidos_box.dart';
+import 'package:tp_final/widgets/snack_bar.dart';
 
 class PedidosScreen extends StatefulWidget {
   @override
@@ -14,8 +16,9 @@ class _PedidosScreenState extends State<PedidosScreen> {
   PedidosMetodo pedidosMetodos = PedidosMetodo();
 
   deletarPedido(int id) {
+    pedidosMetodos.deletePedido(id);
     setState(() {
-      pedidosMetodos.deletePedido(id);
+      pedidosMetodos.pegaDados();
     });
   }
 
@@ -50,7 +53,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
           children: [
             MyBoxPedidos(
               key: UniqueKey(),
-              color: Colors.red,
+              color: kRedColor,
               icone: FontAwesomeIcons.amazon,
               nomePedido: pedidos[index].nomePedido,
               itemsPedido: pedidos[index].itemsPedido,
@@ -63,7 +66,8 @@ class _PedidosScreenState extends State<PedidosScreen> {
               child: Text('DELETE'),
               onPressed: () {
                 deletarPedido(pedidos[index].idPedido);
-                print("-----------DELETED----------");
+                snackBAr(context, kSnackDeleteTitle, kSnackDeleteMessage,
+                    kSnackBarColor);
               },
             ),
           ],

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tp_final/constants/colors.dart';
+import 'package:tp_final/constants/constants.dart';
 import 'package:tp_final/helpers/produtos.dart';
 import 'package:tp_final/services/produto_metodos.dart';
 import 'package:tp_final/widgets/produtos_box.dart';
+import 'package:tp_final/widgets/snack_bar.dart';
 
 class ProdutosScreen extends StatefulWidget {
   @override
@@ -13,8 +16,9 @@ class _ProdutosScreenState extends State<ProdutosScreen> {
   ProdutosMetodos produtosMetodos = ProdutosMetodos();
 
   deletarProdutos(int id) {
+    produtosMetodos.deleteProdutos(id);
     setState(() {
-      produtosMetodos.deleteProdutos(id);
+      produtosMetodos.pegaDados();
     });
   }
 
@@ -47,18 +51,20 @@ class _ProdutosScreenState extends State<ProdutosScreen> {
           children: [
             MyBoxProdutos(
               key: UniqueKey(),
-              color: Colors.red,
+              color: kRedColor,
               icone: FontAwesomeIcons.amazon,
               nomeProduto: produtos[index].produtoNome,
               precoCustoProduto: produtos[index].produtoPrecoCusto,
               precoVendaProduto: produtos[index].produtoPrecoVenda,
+              qtdProduto: produtos[index].produtoQtd,
               id: produtos[index].id,
             ),
             RaisedButton(
               child: Text('DELETE'),
               onPressed: () {
                 deletarProdutos(produtos[index].id);
-                print("-----------DELETED----------");
+                snackBAr(context, kSnackDeleteTitle, kSnackDeleteMessage,
+                    kSnackBarColor);
               },
             ),
           ],

@@ -30,7 +30,7 @@ class Produtos {
   final DateTime updatedAt;
 
   factory Produtos.fromJson(Map<String, dynamic> json) => Produtos(
-        id: json["id"],
+        id: json["idProdutos"],
         produtoNome: json["produtoNome"],
         produtoPrecoCusto: json["produtoPrecoCusto"],
         produtoPrecoVenda: json["produtoPrecoVenda"],
@@ -40,7 +40,7 @@ class Produtos {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "idProdutos": id,
         "produtoNome": produtoNome,
         "produtoPrecoCusto": produtoPrecoCusto,
         "produtoPrecoVenda": produtoPrecoVenda,

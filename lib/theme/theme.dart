@@ -4,15 +4,15 @@ import 'package:tp_final/constants/colors.dart';
 
 ThemeData light = ThemeData(
   brightness: kBrightnessLight,
-  primarySwatch: kIndigo,
-  accentColor: kPink,
-  scaffoldBackgroundColor: kWhite,
+  primarySwatch: kIndigoColor,
+  accentColor: kPinkColor,
+  scaffoldBackgroundColor: kWhiteColor,
 );
 
 ThemeData dark = ThemeData(
   brightness: kBrightnessDark,
-  primarySwatch: kIndigo,
-  accentColor: kPink,
+  primarySwatch: kIndigoColor,
+  accentColor: kPinkColor,
 );
 
 class ThemeNotifier extends ChangeNotifier {

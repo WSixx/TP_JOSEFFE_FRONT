@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tp_final/constants/colors.dart';
+import 'package:tp_final/constants/constants.dart';
 import 'package:tp_final/helpers/clientes.dart';
 import 'package:tp_final/services/cliente_metodos.dart';
 import 'package:tp_final/widgets/cliente_box.dart';
@@ -12,16 +14,11 @@ class ClienteScreen extends StatefulWidget {
 class _ClienteScreenState extends State<ClienteScreen> {
   ClienteMetodos clientesMetodos = ClienteMetodos();
   TextEditingController _searchQueryController = TextEditingController();
-  deletarCliente(int id) {
-    setState(() {
-      clientesMetodos.deleteCliente(id);
-    });
-  }
 
   String seuNome = '';
-  bool temTexto = false;
-  Widget appBarTitle = new Text("AppBar Title");
-  Icon actionIcon = new Icon(Icons.search);
+
+  Widget appBarTitle = Text('Clientes');
+  Icon searchBarIcon = Icon(Icons.search);
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +34,13 @@ class _ClienteScreenState extends State<ClienteScreen> {
                       title: appBarTitle,
                       actions: <Widget>[
                         IconButton(
-                          icon: actionIcon,
+                          icon: searchBarIcon,
                           onPressed: () {
                             setState(() {
                               seuNome = '';
                               _searchQueryController.clear();
-                              if (this.actionIcon.icon == Icons.search) {
-                                this.actionIcon = Icon(Icons.close);
+                              if (this.searchBarIcon.icon == Icons.search) {
+                                this.searchBarIcon = Icon(Icons.close);
                                 this.appBarTitle = TextField(
                                   controller: _searchQueryController,
                                   onSubmitted: (value) async {
@@ -51,7 +48,6 @@ class _ClienteScreenState extends State<ClienteScreen> {
                                     setState(() {
                                       seuNome = value;
                                     });
-                                    print(_searchQueryController.text);
                                   },
                                   onEditingComplete: () {
                                     setState(() {
@@ -60,18 +56,13 @@ class _ClienteScreenState extends State<ClienteScreen> {
                                     });
                                   },
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: kWhiteColor,
                                   ),
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.search,
-                                          color: Colors.white),
-                                      hintText: "Search...",
-                                      hintStyle:
-                                          new TextStyle(color: Colors.white)),
+                                  decoration: kInputStyleSearchButton,
                                 );
                               } else {
-                                this.actionIcon = Icon(Icons.search);
-                                this.appBarTitle = Text("AppBar Title");
+                                this.searchBarIcon = Icon(Icons.search);
+                                this.appBarTitle = Text("Clientes");
                               }
                             });
                           },
@@ -84,36 +75,6 @@ class _ClienteScreenState extends State<ClienteScreen> {
           }
           return Center(child: CircularProgressIndicator());
         });
-  }
-
-  Widget myList2(List<Clientes> clientes, UniqueKey uniqueKey) {
-    return ListView.builder(
-      itemCount: clientes.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            MyBoxCliente(
-              key: ValueKey(clientes[index]),
-              id: clientes[index].idCliente,
-              nomeCliente: clientes[index].nomeCliente,
-              enderecoCliente: clientes[index].enderecoCliente,
-              emailCliente: clientes[index].emailCliente,
-              telefoneCliente: clientes[index].telefoneCliente,
-              statusCliente: clientes[index].statusCliente,
-              color: Colors.red,
-              icone: FontAwesomeIcons.female,
-            ),
-            RaisedButton(
-              child: Text('DELETE'),
-              onPressed: () {
-                deletarCliente(clientes[index].idCliente);
-                print("-----------DELETED----------");
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   Widget myList(List<Clientes> clientes, UniqueKey uniqueKey) {
@@ -130,15 +91,8 @@ class _ClienteScreenState extends State<ClienteScreen> {
               emailCliente: clientes[index].emailCliente,
               telefoneCliente: clientes[index].telefoneCliente,
               statusCliente: clientes[index].statusCliente,
-              color: Colors.red,
+              color: kRedColor,
               icone: FontAwesomeIcons.female,
-            ),
-            RaisedButton(
-              child: Text('DELETE'),
-              onPressed: () {
-                deletarCliente(clientes[index].idCliente);
-                print("-----------DELETED----------");
-              },
             ),
           ],
         );

@@ -10,7 +10,7 @@ Row kEditRow = Row(
       color: Colors.black,
     ),
     SizedBox(width: 10.0),
-    kText,
+    kTextEditar,
   ],
 );
 

@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ScreenButton(
-                  color: kButtonClientes,
+                  color: kButtonClientesColor,
                   textScreen: 'Clientes',
                   screenNav: '/clienteScreen',
                 ),
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 ScreenButton(
-                  color: kButtonClientes,
+                  color: kButtonClientesColor,
                   textScreen: 'Adicionar Cliente',
                   screenNav: '/addcliente',
                 ),
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ScreenButton(
-                  color: kButtonPedidos,
+                  color: kButtonPedidosColor,
                   textScreen: 'Pedidos',
                   screenNav: '/pedidoScreen',
                 ),
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 ScreenButton(
-                  color: kButtonPedidos,
+                  color: kButtonPedidosColor,
                   textScreen: 'Adicionar Pedidos',
                   screenNav: '/addPedido',
                 ),
@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ScreenButton(
-                  color: kButtonProdutos,
+                  color: kButtonProdutosColor,
                   textScreen: 'Produtos',
                   screenNav: '/produtoScreen',
                 ),
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 ScreenButton(
-                  color: kButtonProdutos,
+                  color: kButtonProdutosColor,
                   textScreen: 'Adicionar Produto',
                   screenNav: '/addProduto',
                 ),

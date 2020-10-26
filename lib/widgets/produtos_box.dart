@@ -5,14 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:tp_final/services/pedido_metodos.dart';
+import 'package:tp_final/constants/colors.dart';
+import 'package:tp_final/constants/constants.dart';
+import 'package:tp_final/services/produto_metodos.dart';
 import 'package:tp_final/widgets/alert_edit_widget.dart';
+import 'package:tp_final/widgets/snack_bar.dart';
 
 class MyBoxProdutos extends StatefulWidget {
   final int id;
   final String nomeProduto;
   final double precoCustoProduto;
   final double precoVendaProduto;
+  final int qtdProduto;
 
   final IconData icone;
   final Color color;
@@ -25,6 +29,7 @@ class MyBoxProdutos extends StatefulWidget {
     this.color,
     this.id,
     this.precoVendaProduto,
+    this.qtdProduto,
   }) : super(key: key);
 
   @override
@@ -33,9 +38,11 @@ class MyBoxProdutos extends StatefulWidget {
 
 class _MyBoxProdutosState extends State<MyBoxProdutos> {
   final nomeController = TextEditingController();
-  final nascimentoController = TextEditingController();
-  final salarioController = TextEditingController();
-  PedidosMetodo pedidoMetodo = PedidosMetodo();
+  final precoVendaController = TextEditingController();
+  final precoCustoController = TextEditingController();
+  final qtdProdutosController = TextEditingController();
+
+  ProdutosMetodos produtoMetodo = ProdutosMetodos();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -70,6 +77,8 @@ class _MyBoxProdutosState extends State<MyBoxProdutos> {
                   ),
                   Text("Preco custo: " + widget.precoCustoProduto.toString()),
                   Text("Preco venda: " + widget.precoVendaProduto.toString()),
+                  Text("Qtd: " + widget.qtdProduto.toString()),
+                  SizedBox(height: 10.0),
                   Row(
                     children: [
                       RaisedButton(
@@ -79,6 +88,7 @@ class _MyBoxProdutosState extends State<MyBoxProdutos> {
                             widget.nomeProduto,
                             widget.precoCustoProduto,
                             widget.precoVendaProduto,
+                            widget.qtdProduto,
                             widget.id,
                           );
                           setState(() {});
@@ -88,15 +98,13 @@ class _MyBoxProdutosState extends State<MyBoxProdutos> {
                             Icon(
                               FontAwesomeIcons.edit,
                               size: 18.0,
-                              color: Colors.black,
+                              color: kBlackColor,
                             ),
                             SizedBox(width: 10.0),
                             Text('Editar'),
                           ],
                         ),
                       ),
-                      SizedBox(width: 10.0),
-                      SizedBox(width: 10.0),
                     ],
                   ),
                 ],
@@ -109,7 +117,7 @@ class _MyBoxProdutosState extends State<MyBoxProdutos> {
   }
 
   editPedidoAlert(context, String nomeProduto, double precoCusto,
-      double precoVenda, int id) {
+      double precoVenda, int qtdProduto, int id) {
     Random random = new Random();
     int randomNumber = random.nextInt(99 - 20);
     Alert(
@@ -139,11 +147,11 @@ class _MyBoxProdutosState extends State<MyBoxProdutos> {
             ),
             alertTextField(
                 nomeController, '$nomeProduto', null, Icons.account_circle),
-            alertTextField(salarioController, '$precoCusto',
+            alertTextField(precoCustoController, '$precoCusto',
                 [FilteringTextInputFormatter.digitsOnly], Icons.money),
-            alertTextField(salarioController, '$precoVenda',
+            alertTextField(precoVendaController, '$precoVenda',
                 [FilteringTextInputFormatter.digitsOnly], Icons.money),
-            alertTextField(nascimentoController, precoVenda.toString(), null,
+            alertTextField(qtdProdutosController, qtdProduto.toString(), null,
                 Icons.date_range),
           ],
         ),
@@ -151,13 +159,18 @@ class _MyBoxProdutosState extends State<MyBoxProdutos> {
       buttons: [
         DialogButton(
           onPressed: () {
-            /* networkHelper.updateUser(
-              nomeController.text,
-              nascimentoController.text,
-              double.parse(salarioController.text),
-              id,
-            );*/
-            Navigator.pop(context);
+            _atualizarProduto(
+                produtoMetodo,
+                widget,
+                id,
+                nomeController,
+                precoCustoController,
+                precoVendaController,
+                qtdProdutosController);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                '/homePage', (Route<dynamic> route) => false);
+            snackBAr(context, kSnackUpdateTitle, kSnackUpdateMessage,
+                kSnackBarColor);
           },
           child: Text(
             "Salvar",
@@ -166,5 +179,29 @@ class _MyBoxProdutosState extends State<MyBoxProdutos> {
         )
       ],
     ).show();
+  }
+
+  _atualizarProduto(
+    ProdutosMetodos produtosMetodos,
+    MyBoxProdutos widget,
+    int id,
+    TextEditingController nomeController,
+    TextEditingController precoCustoController,
+    TextEditingController precoVendaController,
+    TextEditingController qtdController,
+  ) {
+    produtosMetodos.updateCliente(
+      id,
+      nomeController.text == '' ? widget.nomeProduto : nomeController.text,
+      precoCustoController.text == ''
+          ? widget.precoCustoProduto
+          : double.parse(precoCustoController.text),
+      precoVendaController.text == ''
+          ? widget.precoVendaProduto
+          : double.parse(precoVendaController.text),
+      precoVendaController.text == ''
+          ? widget.qtdProduto
+          : int.parse(precoVendaController.text),
+    );
   }
 }
