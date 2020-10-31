@@ -62,6 +62,7 @@ class _MyBoxClienteState extends State<MyBoxCliente> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: kBoxDeco,
+        width: MediaQuery.of(context).size.width * 1.010,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Row(
@@ -75,15 +76,19 @@ class _MyBoxClienteState extends State<MyBoxCliente> {
                   color: widget.color,
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Wrap(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                direction: Axis.vertical,
+
                 children: [
                   Text(
                     "Cliente: " + widget.nomeCliente,
                     style: TextStyle(fontSize: 22.0),
                   ),
                   Text("Endereco: " + widget.enderecoCliente),
-                  Text("Email: " + widget.emailCliente),
+                  Text(
+                    "Email: " + widget.emailCliente,
+                  ),
                   Text("Contato: " + widget.telefoneCliente),
                   Text(
                     "Status: " + widget.statusCliente.toString(),
@@ -110,7 +115,7 @@ class _MyBoxClienteState extends State<MyBoxCliente> {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

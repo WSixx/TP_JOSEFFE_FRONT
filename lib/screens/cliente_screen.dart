@@ -82,17 +82,21 @@ class _ClienteScreenState extends State<ClienteScreen> {
       itemCount: clientes.length,
       itemBuilder: (context, index) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MyBoxCliente(
-              key: ValueKey(clientes[index]),
-              id: clientes[index].idCliente,
-              nomeCliente: clientes[index].nomeCliente,
-              enderecoCliente: clientes[index].enderecoCliente,
-              emailCliente: clientes[index].emailCliente,
-              telefoneCliente: clientes[index].telefoneCliente,
-              statusCliente: clientes[index].statusCliente,
-              color: kRedColor,
-              icone: FontAwesomeIcons.female,
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: MyBoxCliente(
+                key: ValueKey(clientes[index]),
+                id: clientes[index].idCliente,
+                nomeCliente: clientes[index].nomeCliente,
+                enderecoCliente: clientes[index].enderecoCliente,
+                emailCliente: clientes[index].emailCliente,
+                telefoneCliente: clientes[index].telefoneCliente,
+                statusCliente: clientes[index].statusCliente,
+                color: kRedColor,
+                icone: FontAwesomeIcons.female,
+              ),
             ),
           ],
         );
