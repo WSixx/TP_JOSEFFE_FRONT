@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'package:tp_final/helpers/produtos.dart';
 
 class ProdutosMetodos {
-  static const String url = 'https://apinodewin.azurewebsites.net/produtos';
+  static const String url =
+      'https://backend-final-final.herokuapp.com/produtos';
 
   Future<Produtos> createProduto(
     String produtoNome,
@@ -40,7 +41,7 @@ class ProdutosMetodos {
     int produtoQtd,
   ) async {
     final http.Response response = await http.put(
-      'https://apinodewin.azurewebsites.net/produtos/$idProduto',
+      'https://backend-final-final.herokuapp.com/$idProduto',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -60,7 +61,7 @@ class ProdutosMetodos {
 
   Future<Produtos> deleteProdutos(int id) async {
     final http.Response response = await http.delete(
-      'https://apinodewin.azurewebsites.net/produtos/$id',
+      'https://backend-final-final.herokuapp.com/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -74,7 +75,7 @@ class ProdutosMetodos {
 
   Future<List<Produtos>> pegaDados() async {
     final response =
-        await http.get('https://apinodewin.azurewebsites.net/produtos');
+        await http.get('https://backend-final-final.herokuapp.com/produtos');
     if (response.statusCode == 200) {
       return compute(parseDados, response.body);
     } else {

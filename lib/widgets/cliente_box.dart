@@ -79,7 +79,6 @@ class _MyBoxClienteState extends State<MyBoxCliente> {
               Wrap(
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 direction: Axis.vertical,
-
                 children: [
                   Text(
                     "Cliente: " + widget.nomeCliente,

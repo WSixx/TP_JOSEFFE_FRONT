@@ -44,23 +44,24 @@ class _PedidosScreenState extends State<PedidosScreen> {
   }
 
   Widget myList(List<Pedidos> pedidos) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, childAspectRatio: 2.2),
+    return ListView.builder(
       itemCount: pedidos.length,
       itemBuilder: (context, index) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MyBoxPedidos(
-              key: UniqueKey(),
-              color: kRedColor,
-              icone: FontAwesomeIcons.amazon,
-              nomePedido: pedidos[index].nomePedido,
-              itemsPedido: pedidos[index].itemsPedido,
-              precoPedido: pedidos[index].precoPedido,
-              idCliente: pedidos[index].clienteIdCliente,
-              nomeCliente: pedidos[index].cliente.nomeCliente,
-              id: pedidos[index].idPedido,
+            FittedBox(
+              child: MyBoxPedidos(
+                key: UniqueKey(),
+                color: kRedColor,
+                icone: FontAwesomeIcons.amazon,
+                nomePedido: pedidos[index].nomePedido,
+                itemsPedido: pedidos[index].itemsPedido,
+                precoPedido: pedidos[index].precoPedido,
+                idCliente: pedidos[index].clienteIdCliente,
+                nomeCliente: pedidos[index].cliente.nomeCliente,
+                id: pedidos[index].idPedido,
+              ),
             ),
             RaisedButton(
               child: Text('DELETE'),

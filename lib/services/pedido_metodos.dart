@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:tp_final/helpers/pedidos.dart';
 
 class PedidosMetodo {
-  static const String url = 'https://apinodewin.azurewebsites.net/pedidos';
+  static const String url = 'https://backend-final-final.herokuapp.com/pedidos';
 
   Future<Pedidos> createPedido(
     String nomePedido,
@@ -40,7 +40,7 @@ class PedidosMetodo {
     double precoPedido,
   ) async {
     final http.Response response = await http.put(
-      'https://apinodewin.azurewebsites.net/pedidos/$idPedido',
+      'https://backend-final-final.herokuapp.com/$idPedido',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -59,7 +59,7 @@ class PedidosMetodo {
 
   Future<Pedidos> deletePedido(int id) async {
     final http.Response response = await http.delete(
-      'https://apinodewin.azurewebsites.net/pedidos/$id',
+      'https://backend-final-final.herokuapp.com/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

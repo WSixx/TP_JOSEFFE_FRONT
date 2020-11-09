@@ -5,7 +5,8 @@ import 'dart:convert';
 import 'package:tp_final/helpers/clientes.dart';
 
 class ClienteMetodos {
-  static const String url = 'https://apinodewin.azurewebsites.net/clientes';
+  static const String url =
+      'https://backend-final-final.herokuapp.com/clientes';
 
   Future<Clientes> createCliente(
     String nomeCliente,
@@ -43,7 +44,7 @@ class ClienteMetodos {
     String status,
   ) async {
     final http.Response response = await http.put(
-      'https://apinodewin.azurewebsites.net/clientes/$id',
+      'https://backend-final-final.herokuapp.com/clientes/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -64,7 +65,7 @@ class ClienteMetodos {
 
   Future<Clientes> deleteCliente(int id) async {
     final http.Response response = await http.delete(
-      'https://apinodewin.azurewebsites.net/clientes/$id',
+      'https://backend-final-final.herokuapp.com/clientes/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -91,8 +92,7 @@ class ClienteMetodos {
   }
 
   Future<List<Clientes>> pegaDadosWhere(String nome) async {
-    final response =
-        await http.get('https://apinodewin.azurewebsites.net/clientes/$nome');
+    final response = await http.get('https://backend-final-final.herokuapp.com/clientes/$nome');
     if (response.statusCode == 200) {
       return compute(parseDados, response.body);
     } else {

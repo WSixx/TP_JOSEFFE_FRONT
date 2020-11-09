@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tp_final/services/pedido_metodos.dart';
 import 'package:tp_final/widgets/formfield_add.dart';
 import 'package:tp_final/widgets/snack_bar.dart';
@@ -28,10 +29,8 @@ class _AddPedidoState extends State<AddPedido> {
         nomePedidoController.text == '' ||
         precoPedidoController.text == '' ||
         idClienteController.text == '') {
-      print('entrou no false');
       return false;
     } else {
-      print('entrou no true');
       return true;
     }
   }
@@ -40,7 +39,7 @@ class _AddPedidoState extends State<AddPedido> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Adicionar Cliente'),
+        title: Text('Adicionar Pedido'),
         centerTitle: true,
       ),
       body: Center(

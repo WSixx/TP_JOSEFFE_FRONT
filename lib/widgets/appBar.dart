@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tp_final/theme/theme.dart';
 
+// ignore: must_be_immutable
 class MyAppBar extends PreferredSize {
   final Function toggle;
   final bool isOn;

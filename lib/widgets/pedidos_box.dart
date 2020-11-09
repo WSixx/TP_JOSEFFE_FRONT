@@ -49,6 +49,7 @@ class _MyBoxPedidosState extends State<MyBoxPedidos> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.black,
@@ -69,8 +70,10 @@ class _MyBoxPedidosState extends State<MyBoxPedidos> {
                   color: widget.color,
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Wrap(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                direction: Axis.vertical,
+
                 children: [
                   Text(
                     "Produto Pedido: ${widget.nomePedido}",

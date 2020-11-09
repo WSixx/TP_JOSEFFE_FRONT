@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:tp_final/constants/colors.dart';
 
 class FormFieldAdd extends StatelessWidget {
   //String title; // TextInputType inputType, TextEditingController controller
@@ -16,22 +18,15 @@ class FormFieldAdd extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           labelText: title,
-          fillColor: Colors.white,
+          fillColor: kWhiteColor,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
             borderSide: BorderSide(),
           ),
           //fillColor: Colors.green
         ),
-        /*validator: (val) {
-          if (val.length == 0) {
-            return "Email cannot be empty";
-          } else {
-            return null;
-          }
-        },*/
         keyboardType: inputType,
-        style: new TextStyle(
+        style: TextStyle(
           fontFamily: "Poppins",
         ),
       ),

@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays([]);
     Future.delayed(Duration(seconds: 3)).then((_) {
-      Navigator.pushReplacementNamed(context, '/firstScreen');
+      Navigator.pushReplacementNamed(context, '/homePage');
     });
   }
 
